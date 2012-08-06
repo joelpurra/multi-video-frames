@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+            MultiVideo
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        />
+    </head>
+    
+    <body>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./">Reset</a>
+                </li>
+                <li>
+                    <a href="http://joelpurra.se/">joelpurra.se</a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>
+                MultiVideo - view multiple video player streams in the same browser window
+            </h1>
+        </header>
+        <section id="controls">
+            <button id="addUrl" type="button">
+                Add
+            </button>
+        </section>
+        <section id="videos">
+        </section>
+        <footer class="container">
+            Coded by
+            <a href="http://joelpurra.com/">Joel Purra</a>
+            - Copyright 2012.
+        </footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js">
+                                                                                            
+        </script>
+        <script>
+                        //<![CDATA[
+                $(function() {
+                    function addUrlInput() {
+                        var $urlInput = $("<input />").attr("type", "url").data("random", getRandom()).appendTo($controls);
+
+                        return $urlInput;
+                    }
+
+                    function getRandom() {
+                        return Math.floor(Math.random() * 100000) + 100000;
+                    }
+
+                    function addVideoPanel($urlInput) {
+                        var $videoPanel = $("<iframe />").data("$urlInput", $urlInput).attr("src", $urlInput.val()).appendTo($videos);
+                        $urlInput.data("$videoPanel", $videoPanel);
+
+                        return $videoPanel;
+                    }
+
+                    var $window = $(window),
+                        $controls = $("#controls"),
+                        $addUrl = $("#addUrl"),
+                        $videos = $("#videos"),
+                        loaded = [];
+
+                    $addUrl.click(function(evt) {
+                        var $target = $(evt.target),
+                            $urlInput = addUrlInput(),
+                            $videoPanel = addVideoPanel($urlInput);
+                    });
+
+                    $window.on("change", function(evt) {
+                        function pingDone() {
+                            console.log("done");
+
+                            var $videoPanel = $target.data("$videoPanel");
+
+                            $videoPanel.attr("src", url);
+                        }
+
+                        function pingFail() {
+                            console.log("fail");
+                        }
+
+                        var $target = $(evt.target),
+                            random = $target.data("random"),
+                            url = $target.val(),
+                            ping = $.get(url).done(pingDone).fail(pingFail);
+                    });
+                });
+                //]]>
+        </script>
+    </body>
+
+</html>
