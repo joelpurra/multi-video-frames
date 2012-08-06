@@ -4,7 +4,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>
-            Play/view multiple video player streams in the same browser window - joelpurra.se/multivideo
+            Play/view multiple video player streams in the same browser window by
+            using iframes - joelpurra.com/projects/multi-video-frames/
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"
         />
@@ -21,35 +22,33 @@
     </head>
     
     <body>
-        <nav>
-            <ul>
-                <li>
-                    <a href="./">Reset</a>
-                </li>
-                <li>
-                    <a href="http://joelpurra.se/">joelpurra.se</a>
-                </li>
-            </ul>
-        </nav>
         <header>
             <h1>
-                Play/view multiple video player streams in the same browser window - joelpurra.se/multivideo
+                Play/view multiple video player streams in the same browser window by
+                using iframes
             </h1>
+            <p>
+                Actually, the page is generic enough to open any pages in the frames.
+                Knock yourself out.
+            </p>
         </header>
         <section id="controls">
             <button id="addUrl" type="button">
-                Add
+                Add frame
             </button>
         </section>
         <section id="videos">
         </section>
         <footer class="container">
+            <a href="./">Clear/reset all frames/pages.</a>
             Coded by
             <a href="http://joelpurra.com/">Joel Purra</a>
-            - Copyright 2012.
+            - Copyright 2012.You should be at
+            <a href="http://joelpurra.com/projects/multi-video-frames/">joelpurra.com/projects/multi-video-frames/</a>
+            .
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js">
-                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                            
         </script>
         <script>
         //<![CDATA[
@@ -71,7 +70,7 @@ $.fn.extend({
 
 $(function() {
     function addUrlInput() {
-        var $urlInput = $("<input />").attr("type", "url").data("random", getRandom()).appendTo($controls);
+        var $urlInput = $("<input />", {"type": "url", "placeholder": "Copy and paste URL here"}).data("random", getRandom()).appendTo($controls);
 
         return $urlInput;
     }
