@@ -4,10 +4,17 @@
     <head>
         <meta charset="UTF-8" />
         <title>
-            MultiVideo
+            Play/view multiple video player streams in the same browser window - joelpurra.se/multivideo
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"
         />
+        <style>
+            html{height: 100%;} body{margin: 0;} #videos { height: 100%; } #videos
+            iframe { box-sizing: border-box; } .videoPanelsHorizontal-1 iframe{ width:
+            100%; } .videoPanelsHorizontal-2 iframe{ width: 50%; } .videoPanelsHorizontal-3
+            iframe{ width: 33.333333333333%; } .videoPanelsHorizontal-4 iframe{ width:
+            25%; } .videoPanelsHorizontal-5 iframe{ width: 20%; }
+        </style>
     </head>
     
     <body>
@@ -23,7 +30,7 @@
         </nav>
         <header>
             <h1>
-                MultiVideo - view multiple video player streams in the same browser window
+                Play/view multiple video player streams in the same browser window - joelpurra.se/multivideo
             </h1>
         </header>
         <section id="controls">
@@ -39,60 +46,97 @@
             - Copyright 2012.
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js">
-                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                    
         </script>
         <script>
-                        //<![CDATA[
-                $(function() {
-                    function addUrlInput() {
-                        var $urlInput = $("<input />").attr("type", "url").data("random", getRandom()).appendTo($controls);
+        //<![CDATA[
+$.fn.extend({
+    scrollToCenterScreen: function() {
+        $('html, body').animate({
+            scrollTop: Math.max(0, $(this).offset().top - ($window.height() / 2))
+        });
+    }
+});
 
-                        return $urlInput;
-                    }
+$.fn.extend({
+    scrollToTop: function() {
+        $('html, body').animate({
+            scrollTop: Math.max(0, $(this).offset().top)
+        });
+    }
+});
 
-                    function getRandom() {
-                        return Math.floor(Math.random() * 100000) + 100000;
-                    }
+$(function() {
+    function addUrlInput() {
+        var $urlInput = $("<input />").attr("type", "url").data("random", getRandom()).appendTo($controls);
 
-                    function addVideoPanel($urlInput) {
-                        var $videoPanel = $("<iframe />").data("$urlInput", $urlInput).attr("src", $urlInput.val()).appendTo($videos);
-                        $urlInput.data("$videoPanel", $videoPanel);
+        $controls.scrollToTop();
 
-                        return $videoPanel;
-                    }
+        return $urlInput;
+    }
 
-                    var $window = $(window),
-                        $controls = $("#controls"),
-                        $addUrl = $("#addUrl"),
-                        $videos = $("#videos"),
-                        loaded = [];
+    function getRandom() {
+        return Math.floor(Math.random() * 100000) + 100000;
+    }
 
-                    $addUrl.click(function(evt) {
-                        var $target = $(evt.target),
-                            $urlInput = addUrlInput(),
-                            $videoPanel = addVideoPanel($urlInput);
-                    });
+    function addVideoPanel($urlInput) {
+        var $videoPanel = $("<iframe />").addClass("videoPanel").data("$urlInput", $urlInput).attr("src", $urlInput.val()).appendTo($videos);
+        $urlInput.data("$videoPanel", $videoPanel);
 
-                    $window.on("change", function(evt) {
-                        function pingDone() {
-                            console.log("done");
+        setVideoSizes();
 
-                            var $videoPanel = $target.data("$videoPanel");
+        return $videoPanel;
+    }
 
-                            $videoPanel.attr("src", url);
-                        }
+    function updateVideoPanels() {
+        var $videoPanels = $videos.find(".videoPanel"),
+            videoPanelCount = $videoPanels.length,
+            // TODO: make horizontal video panel count a setting
+            videoPanelsHorizontalMax = 3,
+            videoPanelsVerticalMax = 3,
+            videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
+            videoPanelsVertical = Math.ceil(videoPanelCount / videoPanelsHorizontal);
 
-                        function pingFail() {
-                            console.log("fail");
-                        }
+        // Clear all classes
+        $videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal);
 
-                        var $target = $(evt.target),
-                            random = $target.data("random"),
-                            url = $target.val(),
-                            ping = $.get(url).done(pingDone).fail(pingFail);
-                    });
-                });
-                //]]>
+        $videoPanels.css({
+            height: (100 * Math.max(1 / videoPanelsVerticalMax, 1 / videoPanelsVertical)) + "%"
+        });
+    }
+
+    function setVideoSizes() {
+        updateVideoPanels();
+    }
+
+    var $window = $(window),
+        $controls = $("#controls"),
+        $addUrl = $("#addUrl"),
+        $videos = $("#videos"),
+        loaded = [];
+
+    $controls.scrollToTop();
+
+    updateVideoPanels();
+
+    $addUrl.click(function(evt) {
+        var $target = $(evt.target),
+            $urlInput = addUrlInput(),
+            $videoPanel = addVideoPanel($urlInput);
+    });
+
+    $window.on("change", function(evt) {
+        var $target = $(evt.target),
+            random = $target.data("random"),
+            url = $target.val(),
+            $videoPanel = $target.data("$videoPanel");
+
+        $videos.scrollToTop();
+
+        $videoPanel.attr("src", url);
+    });
+});
+//]]>
         </script>
     </body>
 
