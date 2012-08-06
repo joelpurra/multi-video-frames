@@ -10,16 +10,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"
         />
         <style>
-            html, body { height: 100%; } body { margin: 0; } #videos { height: 100%; } #controls
-            button{display:block;} #videos iframe, #controls input { /* TODO: use -prefix-free
-            */ -webkit-box-sizing: border-box; -moz-box-sizing: border-box; /* Opera
-            should not need a prefix, but anyways */ -o-box-sizing: border-box; box-sizing:
-            border-box; } .videoPanelsHorizontal-1 iframe, #controls.urlInputs-1 input{
-            width: 100%; } .videoPanelsHorizontal-2 iframe, #controls.urlInputs-2 input{
-            width: 50%; } .videoPanelsHorizontal-3 iframe, #controls.urlInputs-3 input{
-            width: 33.333%; } .videoPanelsHorizontal-4 iframe, #controls.urlInputs-4
-            input{ width: 25%; } .videoPanelsHorizontal-5 iframe, #controls.urlInputs-5
-            input{ width: 20%; }
+            html, body { height: 100%; } html, body, #videos iframe { margin: 0; padding:
+            0; } #videos { height: 100%; } #controls button{display:block;} #videos
+            iframe, #controls input { /* TODO: use -prefix-free */ -webkit-box-sizing:
+            border-box; -moz-box-sizing: border-box; /* Opera should not need a prefix,
+            but anyways */ -o-box-sizing: border-box; box-sizing: border-box; } .videoPanelsHorizontal-1
+            iframe, #controls.urlInputs-1 input{ width: 100%; } .videoPanelsHorizontal-2
+            iframe, #controls.urlInputs-2 input{ width: 50%; } .videoPanelsHorizontal-3
+            iframe, #controls.urlInputs-3 input{ width: 33.333%; } .videoPanelsHorizontal-4
+            iframe, #controls.urlInputs-4 input{ width: 25%; } .videoPanelsHorizontal-5
+            iframe, #controls.urlInputs-5 input{ width: 20%; } .videoPanelsVertical-1
+            iframe { height: 100%; } .videoPanelsVertical-2 iframe { height: 50%; }
+            .videoPanelsVertical-3 iframe { height: 33.333%; } .videoPanelsVertical-4
+            iframe { height: 25%; } .videoPanelsVertical-5 iframe { height: 20%; }
         </style>
     </head>
     
@@ -30,10 +33,22 @@
                 using iframes
             </h1>
             <p>
-                Actually, the page is generic enough to open any pages, not only video
+                Actually, the code is generic enough to open any pages, not only video
                 pages, in the frames. Knock yourself out.
             </p>
         </header>
+        <footer class="container">
+            <p>
+                <a href="./">Clear/reset all frames/pages.</a>
+                Coded by
+                <a href="http://joelpurra.com/">Joel Purra</a>
+                &copy; 2012. You should be at
+                <a href="http://joelpurra.com/projects/multi-video-frames/">joelpurra.com/projects/multi-video-frames/</a>
+                but have a look at
+                <a href="https://github.com/joelpurra/multi-video-frames/">github.com/joelpurra/multi-video-frames/</a>
+                too.
+            </p>
+        </footer>
         <section id="controls">
             <button id="addUrl" type="button">
                 Add frame
@@ -41,29 +56,11 @@
         </section>
         <section id="videos">
         </section>
-        <footer class="container">
-            <a href="./">Clear/reset all frames/pages.</a>
-            Coded by
-            <a href="http://joelpurra.com/">Joel Purra</a>
-            &copy; 2012. You should be at
-            <a href="http://joelpurra.com/projects/multi-video-frames/">joelpurra.com/projects/multi-video-frames/</a>
-            but have a look at
-            <a href="https://github.com/joelpurra/multi-video-frames/">github.com/joelpurra/multi-video-frames/</a>
-            too.
-        </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
         </script>
         <script>
         //<![CDATA[
-$.fn.extend({
-    scrollToCenterScreen: function() {
-        $('html, body').animate({
-            scrollTop: Math.max(0, $(this).offset().top - ($window.height() / 2))
-        });
-    }
-});
-
 $.fn.extend({
     scrollToTop: function() {
         $('html, body').animate({
@@ -98,20 +95,16 @@ $(function() {
     function updateVideoPanels() {
         var $videoPanels = $videos.find(".videoPanel"),
             videoPanelCount = $videoPanels.length,
-            // TODO: make horizontal video panel count a setting
+            // TODO: make horizontal/vertical video panel count a setting
             videoPanelsHorizontalMax = 3,
             videoPanelsVerticalMax = 3,
             videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
-            videoPanelsVertical = Math.ceil(videoPanelCount / videoPanelsHorizontal);
+            videoPanelsVertical = videoPanelsHorizontal === 0 ? 0 : Math.min(Math.ceil(videoPanelCount / videoPanelsHorizontal), videoPanelsVerticalMax);
         // Clear all classes
         $controls.attr("class", "").addClass("urlInputs-" + videoPanelsHorizontal).scrollToTop();
 
         // Clear all classes
-        $videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal);
-
-        $videoPanels.css({
-            height: (100 * (1 / Math.min(videoPanelsVerticalMax, videoPanelsVertical))) + "%"
-        });
+        $videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal).addClass("videoPanelsVertical-" + videoPanelsVertical);
     }
 
     function setVideoSizes() {
@@ -146,7 +139,7 @@ $(function() {
 
         $videos.scrollToTop();
 
-        loadUrl()
+        loadUrl();
     });
 });
 //]]>
