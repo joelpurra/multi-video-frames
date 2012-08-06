@@ -49,97 +49,101 @@
             - Copyright 2012.
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js">
-                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                    
         </script>
         <script>
-                //<![CDATA[
-        $.fn.extend({
-            scrollToCenterScreen: function() {
-                $('html, body').animate({
-                    scrollTop: Math.max(0, $(this).offset().top - ($window.height() / 2))
-                });
-            }
+        //<![CDATA[
+$.fn.extend({
+    scrollToCenterScreen: function() {
+        $('html, body').animate({
+            scrollTop: Math.max(0, $(this).offset().top - ($window.height() / 2))
         });
+    }
+});
 
-        $.fn.extend({
-            scrollToTop: function() {
-                $('html, body').animate({
-                    scrollTop: Math.max(0, $(this).offset().top)
-                });
-            }
+$.fn.extend({
+    scrollToTop: function() {
+        $('html, body').animate({
+            scrollTop: Math.max(0, $(this).offset().top)
         });
+    }
+});
 
-        $(function() {
-            function addUrlInput() {
-                var $urlInput = $("<input />").attr("type", "url").data("random", getRandom()).appendTo($controls);
+$(function() {
+    function addUrlInput() {
+        var $urlInput = $("<input />").attr("type", "url").data("random", getRandom()).appendTo($controls);
 
-                return $urlInput;
-            }
+        return $urlInput;
+    }
 
-            function getRandom() {
-                return Math.floor(Math.random() * 100000) + 100000;
-            }
+    function getRandom() {
+        return Math.floor(Math.random() * 100000) + 100000;
+    }
 
-            function addVideoPanel($urlInput) {
-                var $videoPanel = $("<iframe />").addClass("videoPanel").data("$urlInput", $urlInput).appendTo($videos);
-                $urlInput.data("$videoPanel", $videoPanel).focus();
+    function addVideoPanel($urlInput) {
+        var $videoPanel = $("<iframe />").addClass("videoPanel").data("$urlInput", $urlInput).appendTo($videos);
+        $urlInput.data("$videoPanel", $videoPanel).focus();
 
-                setVideoSizes();
+        setVideoSizes();
 
-                return $videoPanel;
-            }
+        return $videoPanel;
+    }
 
-            function updateVideoPanels() {
-                var $videoPanels = $videos.find(".videoPanel"),
-                    videoPanelCount = $videoPanels.length,
-                    // TODO: make horizontal video panel count a setting
-                    videoPanelsHorizontalMax = 3,
-                    videoPanelsVerticalMax = 3,
-                    videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
-                    videoPanelsVertical = Math.ceil(videoPanelCount / videoPanelsHorizontal);
-                // Clear all classes
-                $controls.attr("class", "").addClass("urlInputs-" + videoPanelsHorizontal).scrollToTop();
+    function updateVideoPanels() {
+        var $videoPanels = $videos.find(".videoPanel"),
+            videoPanelCount = $videoPanels.length,
+            // TODO: make horizontal video panel count a setting
+            videoPanelsHorizontalMax = 3,
+            videoPanelsVerticalMax = 3,
+            videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
+            videoPanelsVertical = Math.ceil(videoPanelCount / videoPanelsHorizontal);
+        // Clear all classes
+        $controls.attr("class", "").addClass("urlInputs-" + videoPanelsHorizontal).scrollToTop();
 
-                // Clear all classes
-                $videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal);
+        // Clear all classes
+        $videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal);
 
-                $videoPanels.css({
-                    height: (100 * (1 / Math.min(videoPanelsVerticalMax, videoPanelsVertical))) + "%"
-                });
-            }
-
-            function setVideoSizes() {
-                updateVideoPanels();
-            }
-
-            var $window = $(window),
-                $controls = $("#controls"),
-                $addUrl = $("#addUrl"),
-                $videos = $("#videos"),
-                loaded = [];
-
-            $controls.scrollToTop();
-
-            updateVideoPanels();
-
-            $addUrl.click(function(evt) {
-                var $target = $(evt.target),
-                    $urlInput = addUrlInput(),
-                    $videoPanel = addVideoPanel($urlInput);
-            });
-
-            $window.on("change", function(evt) {
-                var $target = $(evt.target),
-                    random = $target.data("random"),
-                    url = $target.val(),
-                    $videoPanel = $target.data("$videoPanel");
-
-                $videos.scrollToTop();
-
-                $videoPanel.attr("src", url);
-            });
+        $videoPanels.css({
+            height: (100 * (1 / Math.min(videoPanelsVerticalMax, videoPanelsVertical))) + "%"
         });
-        //]]>
+    }
+
+    function setVideoSizes() {
+        updateVideoPanels();
+    }
+
+    var $window = $(window),
+        $controls = $("#controls"),
+        $addUrl = $("#addUrl"),
+        $videos = $("#videos"),
+        loaded = [];
+
+    $controls.scrollToTop();
+
+    updateVideoPanels();
+
+    $addUrl.click(function(evt) {
+        var $target = $(evt.target),
+            $urlInput = addUrlInput(),
+            $videoPanel = addVideoPanel($urlInput);
+    });
+
+    $window.on("change", function(evt) {
+        function loadUrl() {
+            $videoPanel.attr("src", url);
+        }
+
+        var $target = $(evt.target),
+            random = $target.data("random"),
+            url = $target.val(),
+            $videoPanel = $target.data("$videoPanel");
+
+        $videos.scrollToTop();
+
+        loadUrl()
+    });
+});
+//]]>
         </script>
     </body>
 
