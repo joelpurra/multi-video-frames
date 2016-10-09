@@ -1,14 +1,14 @@
 # multi-video-frames
 *Play/view multiple video player streams in the same browser window by using iframes.*
 
-Project page and live version: http://joelpurra.com/projects/multi-video-frames/
+Project page and live version: https://joelpurra.com/projects/multi-video-frames/
 
-<img src="http://joelpurra.com/projects/multi-video-frames/sample-olympic-games-summer-2012.jpg" alt="Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten"  title="Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten" />  
+<img src="https://joelpurra.com/projects/multi-video-frames/sample-olympic-games-summer-2012.jpg" alt="Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten"  title="Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten" />  
 Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten.
 
 ## Usage
 
-1. Go to http://joelpurra.com/projects/multi-video-frames/
+1. Go to https://joelpurra.com/projects/multi-video-frames/
 1. Click the button to add frame.
 1. Enter any URL into the address box.
 1. Unfocus the address box (press tab or click outside the box) to load the URL into the frame.
@@ -45,7 +45,7 @@ If you can find an "embed" button on your favorite video site, there's usually a
 * Convert from known URL formats to better URL formats (see YouTube workaround).
 
 ## License
-Copyright (c) 2012, Joel Purra <http://joelpurra.se/>
+Copyright (c) 2012, Joel Purra <https://joelpurra.se/>
 All rights reserved.
 
 When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL.
