@@ -84,4 +84,4 @@ open "http://localhost:1337"
 
 
 
-Copyright &copy; 2012, [Joel Purra](https://joelpurra.se/). All rights reserved. When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL. Please see the LICENSE files for details.
+Copyright &copy; 2012, 2013, 2014, 2015, 2016, 2017, [Joel Purra](https://joelpurra.se/). All rights reserved. When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL. Please see the LICENSE files for details.

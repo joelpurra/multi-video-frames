@@ -1,5 +1,5 @@
 multi-video-frames HTML helper. Play/view multiple video player streams in the same browser window by using iframes.
-Copyright (c) 2012, Joel Purra <https://joelpurra.se/>
+Copyright (c) 2012, 2013, 2014, 2015, 2016, 2017, Joel Purra <https://joelpurra.se/>
 All rights reserved.
 
 When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL.
