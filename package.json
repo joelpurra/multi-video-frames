@@ -4,13 +4,21 @@
   "version": "0.0.0",
   "description": "Play/view multiple video player streams in the same browser window by using iframes.",
   "scripts": {
-    "start": "st --no-cache"
+    "start": "st --no-cache",
+    "test": "npm run --silent lint",
+    "lint": "npm run --silent eslint --",
+    "eslint": "eslint ./resources/javascript"
   },
   "author": "Joel Purra <code@joelpurra.com> (https://joelpurra.com/)",
   "license": "BSD-2-Clause OR MIT OR GPL-3.0",
   "homepage": "https://joelpurra.com/projects/multi-video-frames/",
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "pre-commit": "^1.2.2",
     "st": "^1.2.0"
   },
   "repository": {
