@@ -44,6 +44,22 @@ If you can find an "embed" button on your favorite video site, there's usually a
 * Optionally extract the video object (or hide everything else) when loading new URLs, to get a clutter-free view.
 * Convert from known URL formats to better URL formats (see YouTube workaround).
 
+## Development
+
+```shell
+# Get dependencies.
+npm install
+
+# Run tests.
+npm run --silent test
+
+# Optionally run a local development server.
+npm run --silent start
+
+# Go to the development server's default address.
+open "http://localhost:1337"
+```
+
 ## License
 Copyright (c) 2012, Joel Purra <https://joelpurra.se/>
 All rights reserved.
