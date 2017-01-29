@@ -3,12 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "description": "Play/view multiple video player streams in the same browser window by using iframes.",
-  "scripts": {},
+  "scripts": {
+    "start": "st --no-cache"
+  },
   "author": "Joel Purra <code@joelpurra.com> (https://joelpurra.com/)",
   "license": "BSD-2-Clause OR MIT OR GPL-3.0",
   "homepage": "https://joelpurra.com/projects/multi-video-frames/",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "st": "^1.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joelpurra/multi-video-frames.git"
