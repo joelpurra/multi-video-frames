@@ -80,6 +80,13 @@ open "http://localhost:1337"
 
 
 
+## Thanks
+
+- Thank you [Riley Shaw](http://rileyjshaw.com/) for the icon [*Upper Left*](https://thenounproject.com/term/upper-left/294472/).
+
+
+
+
 ---
 
 

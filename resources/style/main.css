@@ -18,6 +18,38 @@ body,
   height: 100%;
 }
 
+@keyframes arrow-animation {
+  0% {
+    background-position: 50% 50%;
+  }
+  10% {
+    background-position: 45% 45%;
+  }
+  20% {
+    background-position: 47% 47%;
+  }
+  30% {
+    background-position: 45% 45%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 50% 50%;
+  }
+}
+
+#videos:empty {
+  background-image: url("../image/arrow-north-west.svg");
+  background-position: 50% 50%;
+  background-size: 25%;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  animation-name: arrow-animation;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+}
+
 #controls button {
   display: block;
 }
