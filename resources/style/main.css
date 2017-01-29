@@ -10,12 +10,16 @@ body,
   padding: 0;
 }
 
+#videos iframe {
+  border: 0;
+}
+
 #videos {
   height: 100%;
 }
 
-#controls butto {
-  isplay: block
+#controls button {
+  display: block;
 }
 
 #videos iframe,
@@ -29,27 +33,27 @@ body,
 }
 
 .videoPanelsHorizontal-1 iframe,
-#controls.urlInputs-1 inpu {
+#controls.urlInputs-1 input {
   width: 100%;
 }
 
 .videoPanelsHorizontal-2 iframe,
-#controls.urlInputs-2 inpu {
+#controls.urlInputs-2 input {
   width: 50%;
 }
 
 .videoPanelsHorizontal-3 iframe,
-#controls.urlInputs-3 inpu {
-  width: 33.333%;
+#controls.urlInputs-3 input {
+  width: 33.33333%;
 }
 
 .videoPanelsHorizontal-4 iframe,
-#controls.urlInputs-4 inpu {
+#controls.urlInputs-4 input {
   width: 25%;
 }
 
 .videoPanelsHorizontal-5 iframe,
-#controls.urlInputs-5 inpu {
+#controls.urlInputs-5 input {
   width: 20%;
 }
 
@@ -62,7 +66,7 @@ body,
 }
 
 .videoPanelsVertical-3 iframe {
-  height: 33.333%;
+  height: 33.33333%;
 }
 
 .videoPanelsVertical-4 iframe {
