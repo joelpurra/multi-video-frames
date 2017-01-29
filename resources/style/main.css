@@ -1,0 +1,74 @@
+html,
+body {
+  height: 100%;
+}
+
+html,
+body,
+#videos iframe {
+  margin: 0;
+  padding: 0;
+}
+
+#videos {
+  height: 100%;
+}
+
+#controls butto {
+  isplay: block
+}
+
+#videos iframe,
+#controls input {
+  /* TODO: use -prefix-free */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Opera should not need a prefix, but anyways */
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.videoPanelsHorizontal-1 iframe,
+#controls.urlInputs-1 inpu {
+  width: 100%;
+}
+
+.videoPanelsHorizontal-2 iframe,
+#controls.urlInputs-2 inpu {
+  width: 50%;
+}
+
+.videoPanelsHorizontal-3 iframe,
+#controls.urlInputs-3 inpu {
+  width: 33.333%;
+}
+
+.videoPanelsHorizontal-4 iframe,
+#controls.urlInputs-4 inpu {
+  width: 25%;
+}
+
+.videoPanelsHorizontal-5 iframe,
+#controls.urlInputs-5 inpu {
+  width: 20%;
+}
+
+.videoPanelsVertical-1 iframe {
+  height: 100%;
+}
+
+.videoPanelsVertical-2 iframe {
+  height: 50%;
+}
+
+.videoPanelsVertical-3 iframe {
+  height: 33.333%;
+}
+
+.videoPanelsVertical-4 iframe {
+  height: 25%;
+}
+
+.videoPanelsVertical-5 iframe {
+  height: 20%;
+}

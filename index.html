@@ -1,214 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<title>
-		Play/view multiple video player streams in the same browser window by using iframes - joelpurra.com/projects/multi-video-frames/
-	</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<style>
-	html,
-	body
-	{
-		height: 100%;
-	}
-	html,
-	body,
-	#videos iframe
-	{
-		margin: 0; padding:
-		0;
-	}
-	#videos
-	{
-		height: 100%;
-	}
-	#controls butto
-	{
-		isplay:block
-	}
-	#videos
-	iframe,
-	#controls input
-	{
-		/* TODO: use -prefix-free */
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		/* Opera should not need a prefix, but anyways */
-		-o-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-	.videoPanelsHorizontal-1
-	iframe,
-	#controls.urlInputs-1 inpu
-	{
-		width: 100%;
-	}
-	.videoPanelsHorizontal-2
-	iframe,
-	#controls.urlInputs-2 inpu
-	{
-		width: 50%;
-	}
-	.videoPanelsHorizontal-3
-	iframe,
-	#controls.urlInputs-3 inpu
-	{
-		width: 33.333%;
-	}
-	.videoPanelsHorizontal-4
-	iframe,
-	#controls.urlInputs-4 inpu
-	{
-		width: 25%;
-	}
-	.videoPanelsHorizontal-5
-	iframe,
-	#controls.urlInputs-5 inpu
-	{
-		width: 20%;
-	}
-	.videoPanelsVertical-1
-	iframe
-	{
-		height: 100%;
-	}
-	.videoPanelsVertical-2 iframe
-	{
-		height: 50%;
-	}
-	.videoPanelsVertical-3 iframe
-	{
-		height: 33.333%;
-	}
-	.videoPanelsVertical-4
-	iframe
-	{
-		height: 25%;
-	}
-	.videoPanelsVertical-5 iframe
-	{
-		height: 20%;
-	}
-	</style>
+    <meta charset="UTF-8" />
+    <title>
+        Play/view multiple video player streams in the same browser window by using iframes - joelpurra.com/projects/multi-video-frames/
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./resources/style/main.css" />
 </head>
 
 <body>
-	<header>
-		<h1>
-			Play/view multiple video player streams in the same browser window by
-			using iframes
-		</h1>
-		<p>
-			Actually, the code is generic enough to open any pages, not only video
-			pages, in the frames. Knock yourself out.
-		</p>
-	</header>
-	<footer class="container">
-		<p>
-			<a href="./">Clear/reset all frames/pages.</a>
-			Coded by
-			<a href="https://joelpurra.com/">Joel Purra</a>
-			&copy; 2012. You should be at
-			<a href="https://joelpurra.com/projects/multi-video-frames/">joelpurra.com/projects/multi-video-frames/</a>
-			but have a look at
-			<a href="https://github.com/joelpurra/multi-video-frames/">github.com/joelpurra/multi-video-frames/</a>
-			too.
-		</p>
-	</footer>
-	<section id="controls">
-		<button id="addUrl" type="button">
-			Add frame
-		</button>
-	</section>
-	<section id="videos">
-	</section>
-	<script src="./resources/javascript/external/jquery-1.12.4.min.js"></script>
-	<script>
-	//<![CDATA[
-	$.fn.extend({
-		scrollToTop: function() {
-			$('html, body').animate({
-				scrollTop: Math.max(0, $(this).offset().top)
-			});
-		}
-	});
+    <header>
+        <h1>
+            Play/view multiple video player streams in the same browser window by
+            using iframes
+        </h1>
+        <p>
+            Actually, the code is generic enough to open any pages, not only video
+            pages, in the frames. Knock yourself out.
+        </p>
+    </header>
+    <footer class="container">
+        <p>
+            <a href="./">Clear/reset all frames/pages.</a>
+            Coded by
+            <a href="https://joelpurra.com/">Joel Purra</a>
+            &copy; 2012. You should be at
+            <a href="https://joelpurra.com/projects/multi-video-frames/">joelpurra.com/projects/multi-video-frames/</a>
+            but have a look at
+            <a href="https://github.com/joelpurra/multi-video-frames/">github.com/joelpurra/multi-video-frames/</a>
+            too.
+        </p>
+    </footer>
+    <section id="controls">
+        <button id="addUrl" type="button">
+            Add frame
+        </button>
+    </section>
+    <section id="videos">
+    </section>
+    <script src="./resources/javascript/external/jquery-1.12.4.min.js"></script>
+    <script>
+    //<![CDATA[
+    $.fn.extend({
+        scrollToTop: function() {
+            $('html, body').animate({
+                scrollTop: Math.max(0, $(this).offset().top)
+            });
+        }
+    });
 
-	$(function() {
-		function addUrlInput() {
-			var $urlInput = $("<input />", {
-				"type": "url",
-				"placeholder": "Copy and paste URL here"
-			}).data("random", getRandom()).appendTo($controls);
+    $(function() {
+        function addUrlInput() {
+            var $urlInput = $("<input />", {
+                "type": "url",
+                "placeholder": "Copy and paste URL here"
+            }).data("random", getRandom()).appendTo($controls);
 
-			return $urlInput;
-		}
+            return $urlInput;
+        }
 
-		function getRandom() {
-			return Math.floor(Math.random() * 100000) + 100000;
-		}
+        function getRandom() {
+            return Math.floor(Math.random() * 100000) + 100000;
+        }
 
-		function addVideoPanel($urlInput) {
-			var $videoPanel = $("<iframe />").addClass("videoPanel").data("$urlInput", $urlInput).appendTo($videos);
-			$urlInput.data("$videoPanel", $videoPanel).focus();
+        function addVideoPanel($urlInput) {
+            var $videoPanel = $("<iframe />").addClass("videoPanel").data("$urlInput", $urlInput).appendTo($videos);
+            $urlInput.data("$videoPanel", $videoPanel).focus();
 
-			setVideoSizes();
+            setVideoSizes();
 
-			return $videoPanel;
-		}
+            return $videoPanel;
+        }
 
-		function updateVideoPanels() {
-			var $videoPanels = $videos.find(".videoPanel"),
-			videoPanelCount = $videoPanels.length,
-			// TODO: make horizontal/vertical video panel count a setting
-			videoPanelsHorizontalMax = 3,
-			videoPanelsVerticalMax = 3,
-			videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
-			videoPanelsVertical = videoPanelsHorizontal === 0 ? 0 : Math.min(Math.ceil(videoPanelCount / videoPanelsHorizontal), videoPanelsVerticalMax);
-			// Clear all classes
-			$controls.attr("class", "").addClass("urlInputs-" + videoPanelsHorizontal).scrollToTop();
+        function updateVideoPanels() {
+            var $videoPanels = $videos.find(".videoPanel"),
+            videoPanelCount = $videoPanels.length,
+            // TODO: make horizontal/vertical video panel count a setting
+            videoPanelsHorizontalMax = 3,
+            videoPanelsVerticalMax = 3,
+            videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
+            videoPanelsVertical = videoPanelsHorizontal === 0 ? 0 : Math.min(Math.ceil(videoPanelCount / videoPanelsHorizontal), videoPanelsVerticalMax);
+            // Clear all classes
+            $controls.attr("class", "").addClass("urlInputs-" + videoPanelsHorizontal).scrollToTop();
 
-			// Clear all classes
-			$videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal).addClass("videoPanelsVertical-" + videoPanelsVertical);
-		}
+            // Clear all classes
+            $videos.attr("class", "").addClass("videoPanelsHorizontal-" + videoPanelsHorizontal).addClass("videoPanelsVertical-" + videoPanelsVertical);
+        }
 
-		function setVideoSizes() {
-			updateVideoPanels();
-		}
+        function setVideoSizes() {
+            updateVideoPanels();
+        }
 
-		var $window = $(window),
-		$controls = $("#controls"),
-		$addUrl = $("#addUrl"),
-		$videos = $("#videos"),
-		loaded = [];
+        var $window = $(window),
+        $controls = $("#controls"),
+        $addUrl = $("#addUrl"),
+        $videos = $("#videos"),
+        loaded = [];
 
-		$controls.scrollToTop();
+        $controls.scrollToTop();
 
-		updateVideoPanels();
+        updateVideoPanels();
 
-		$addUrl.click(function(evt) {
-			var $target = $(evt.target),
-			$urlInput = addUrlInput(),
-			$videoPanel = addVideoPanel($urlInput);
-		});
+        $addUrl.click(function(evt) {
+            var $target = $(evt.target),
+            $urlInput = addUrlInput(),
+            $videoPanel = addVideoPanel($urlInput);
+        });
 
-		$window.on("change", function(evt) {
-			function loadUrl() {
-				$videoPanel.attr("src", url);
-			}
+        $window.on("change", function(evt) {
+            function loadUrl() {
+                $videoPanel.attr("src", url);
+            }
 
-			var $target = $(evt.target),
-			random = $target.data("random"),
-			url = $target.val(),
-			$videoPanel = $target.data("$videoPanel");
+            var $target = $(evt.target),
+            random = $target.data("random"),
+            url = $target.val(),
+            $videoPanel = $target.data("$videoPanel");
 
-			$videos.scrollToTop();
+            $videos.scrollToTop();
 
-			loadUrl();
-		});
-	});
-	//]]>
-	</script>
-	<!--#include virtual="/tracker/piwik.html"-->
+            loadUrl();
+        });
+    });
+    //]]>
+    </script>
+    <!--#include virtual="/tracker/piwik.html"-->
 </body>
 </html>
