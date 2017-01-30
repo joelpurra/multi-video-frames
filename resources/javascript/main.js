@@ -2,7 +2,7 @@
     $.fn.extend({
         scrollToTop: function() {
             $("html, body").animate({
-                scrollTop: Math.max(0, $(this).offset().top),
+                scrollTop: Math.max(0, $(this).offset().top + 1),
             });
         },
     });
@@ -11,6 +11,7 @@
         $window = $(window),
         $controls = $("#controls"),
         $addUrl = $("#addUrl"),
+        $removeAllUrls = $("#removeAllUrls"),
         $videos = $("#videos"),
         $sharingLinkAnchor = $("#sharing-link-anchor"),
         $sharingLinkTextbox = $("#sharing-link-textbox");
@@ -38,6 +39,8 @@
 
             $urlInput.data("$videoPanel", $videoPanel).focus();
             setVideoSizes();
+
+            $removeAllUrls.css("display", "inline-block");
 
             return $videoPanel;
         }

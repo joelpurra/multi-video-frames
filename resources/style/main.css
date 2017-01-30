@@ -116,6 +116,20 @@ main textarea,
   background-color: #ffffff;
 }
 
+#controls button {}
+
+#controls a {
+  float: right;
+  margin-top: 0.1em;
+  margin-right: 0.5em;
+  color: #ffffff;
+  font-size: 0.9em;
+}
+
+#removeAllUrls {
+  display: none;
+}
+
 #videos iframe,
 #controls input {
   /* TODO: use -prefix-free */
