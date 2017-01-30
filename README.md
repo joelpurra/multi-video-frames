@@ -1,5 +1,12 @@
 # [multi-video-frames](https://joelpurra.com/projects/multi-video-frames/)
 
+<p class="donate">
+    <a href="https://joelpurra.com/donate/proceed/?amount=5&currency=usd"><kbd>Donate $5 now</kbd></a>
+    <a href="https://joelpurra.com/donate/proceed/?amount=25&currency=usd"><kbd>Donate $25 now</kbd></a>
+    <a href="https://joelpurra.com/donate/proceed/?amount=100&currency=usd&invoice=true"><kbd>Donate $100 now</kbd></a>
+    <a href="https://joelpurra.com/donate/"><kbd>More options</kbd></a>
+</p>
+
 *Play/view multiple video player streams in the same browser window by using iframes.*
 
 - [Project page and live version](https://joelpurra.com/projects/multi-video-frames/)
@@ -134,4 +141,4 @@ open "http://localhost:1337"
 
 
 
-Copyright &copy; 2012, 2013, 2014, 2015, 2016, 2017, [Joel Purra](https://joelpurra.com/). All rights reserved. When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL. Please see the LICENSE files for details.
+Copyright &copy; 2012, 2013, 2014, 2015, 2016, 2017, [Joel Purra](https://joelpurra.com/). All rights reserved. When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL. Please see the LICENSE files for details. [Your donations are appreciated!](https://joelpurra.com/donate/)
