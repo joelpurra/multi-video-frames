@@ -11,7 +11,7 @@
         function addUrlInput() {
             var $urlInput = $("<input />", {
                 "type": "url",
-                "placeholder": "Copy and paste URL here",
+                "placeholder": "https://... -- copy and paste URL here",
             })
                 .data("random", getRandom())
                 .appendTo($controls);

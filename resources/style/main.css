@@ -3,6 +3,10 @@ body {
   height: 100%;
 }
 
+html {
+  background-color: #666666;
+}
+
 html,
 body,
 #videos iframe {
@@ -16,6 +20,19 @@ body,
 
 #videos {
   height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+#not-video {
+  padding: 1em;
+}
+
+header,
+main,
+footer {
 }
 
 @keyframes arrow-animation {
@@ -52,6 +69,10 @@ body,
 
 #controls button {
   display: block;
+}
+
+#controls input {
+  background-color: #dddddd;
 }
 
 #videos iframe,
