@@ -3,8 +3,12 @@ body {
   height: 100%;
 }
 
-html {
-  background-color: #666666;
+body {
+  background-color: #928dab;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1f1c2c), color-stop(1, #928dab));
+  background-image: -moz-linear-gradient(center bottom, #1f1c2c 0%, #928dab 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 html,
@@ -34,6 +38,7 @@ h6 {
 
 body {
   font-weight: 300;
+  color: #727272;
 }
 
 h1,
@@ -44,19 +49,28 @@ h5,
 h6 {
   font-weight: 600;
   font-size: 2.5em;
+  color: #534768;
+}
+
+#not-video h1 a,
+#not-video h1 a:hover,
+#not-video h1 a:active,
+#not-video h1 a:visited {
+  text-decoration: none;
+  color: #534768;
 }
 
 #not-video {
   padding: 1em;
+  background-color: #ffffff;
 }
 
 header,
 main,
-footer {
-}
+footer {}
 
 main textarea {
-  width: 50%;
+  min-width: 50%;
   height: 5em;
   vertical-align: text-top;
 }
@@ -99,7 +113,7 @@ main textarea {
 
 main textarea,
 #controls input {
-  background-color: #dddddd;
+  background-color: #ffffff;
 }
 
 #videos iframe,
