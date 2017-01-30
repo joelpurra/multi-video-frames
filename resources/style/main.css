@@ -60,8 +60,15 @@ h6 {
   color: #534768;
 }
 
+#not-video h1 {
+  margin-top: 0;
+}
+
 #not-video {
-  padding: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.75em;
+  padding-bottom: 1em;
   background-color: #ffffff;
 }
 
