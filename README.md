@@ -16,21 +16,36 @@ Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games,
 
 ## Usage
 
+### Manually enter URLs
+
 1. Go to https://joelpurra.com/projects/multi-video-frames/
 1. Click the button to add frame.
 1. Enter any URL into the address box.
 1. Unfocus the address box (press tab or click outside the box) to load the URL into the frame.
 1. Rinse, repeat, enjoy.
 
-Sample URLs
-- `https://www.ustream.tv/embed/6540154`
-- `http://endofworld.net/endofworld.swf`
-- `https://blip.tv/play/hdljgpC1ZQI.html?p=1`
-- `https://www.youtube.com/embed/oHg5SJYRHA0`
+
+### Create a link for sharing
+
+1. Follow the steps for manually entering URLs.
+1. Look at the *direct link to these frames* above the videos.
+1. Copy the link.
+1. Send the link to your friends!
+
+
+### Sample URLs
+
+- `https://player.vimeo.com/video/108679294`
+- `https://www.youtube.com/embed/Xz1a5iTi3aU`
+- `https://www.youtube.com/embed/9bZkp7q19f0`
+- `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/208395706&visual=true`
 
 
 
-## Fixes for YouTube
+## Common URL fixes
+
+### YouTube
+
 The regular URL will not work ([`X-Frame-Options:SAMEORIGIN`](https://google.com/?q=X-Frame-Options:SAMEORIGIN)) &mdash; but there's a special embed URL that works just fine! Convert the top address to the below adress, by copying the video id. YouTube also has an embed button, as desribed below.
 
 - `https://www.youtube.com/watch?v=VIDEOID`
@@ -42,10 +57,34 @@ Example
 - `https://www.youtube.com/embed/oHg5SJYRHA0`
 
 
+### Vimeo
 
-## Generic "full screen" video
+Vimeo allows embedding videos, and it's easy to convert from the regular URL to an embeddable version.
 
-If you can find an "embed" button on your favorite video site, there's usually a URL that can be extracted and used as a "full screen"/"full frame" version. The blip.tv sample URL above was extracted from the embed code at [Day9's MaNa (P) vs Naama (T) Game 1 DHW10 Grand Finals cast](https://blip.tv/day9tv/mana-p-vs-naama-t-game-1-grand-finals-dreamhack-steelseries-tournament-4463233), and the UStream code was found through [Nasa TV/UStream](https://www.nasa.gov/multimedia/nasatv/ustream.html).
+- `https://vimeo.com/VIDEOID`
+- `https://player.vimeo.com/video/VIDEOID`
+
+Example
+
+- `https://vimeo.com/22439234`
+- `https://player.vimeo.com/video/22439234`
+
+
+
+### Generic "full screen" video, music, and embeds
+
+If you can find a "share" or "embed" button on your favorite video or music site, there's usually a URL that can be extracted and used as a "full screen"/"full frame" version. The Soundcloud sample URL above was extracted from the embed code for [DJ Frane's track
+On The Air](https://soundcloud.com/djfrane/on-the-air) by clicking "share".
+
+
+
+## Sharing link URL format
+
+- The base URL is `https://joelpurra.com/projects/multi-video-frames/`.
+- The URL lists each video as a [`url` query string key/value](https://url.spec.whatwg.org/#syntax-url-query).
+- Each URL query string must be encoded with [`encodeURIComponent(url)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) to ensure query string parameters are passed correctly.
+- Each URL has to start with `https://`.
+- An example URL with frames with videos from Vimeo and Youtube as well as music from Soundcloud looks like this: [`https://joelpurra.com/projects/multi-video-frames/?url=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F108679294&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2FXz1a5iTi3aU&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2F9bZkp7q19f0&url=https%3A%2F%2Fw.soundcloud.com%2Fplayer%2F%3Furl%3Dhttps%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F208395706%26visual%3Dtrue`](https://joelpurra.com/projects/multi-video-frames/?url=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F108679294&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2FXz1a5iTi3aU&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2F9bZkp7q19f0&url=https%3A%2F%2Fw.soundcloud.com%2Fplayer%2F%3Furl%3Dhttps%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F208395706%26visual%3Dtrue)
 
 
 
@@ -58,7 +97,7 @@ If you can find an "embed" button on your favorite video site, there's usually a
 - Dynamic frame resize by dragging handles, as it would work in a normal non-browser window.
 - Optionally extract the video object (or hide everything else) when loading new URLs, to get a clutter-free view.
 - Convert from known URL formats to better URL formats (see YouTube workaround).
-- Add dark page background option.
+- ~~Add dark page background option.~~
 
 
 

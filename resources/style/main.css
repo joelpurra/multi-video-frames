@@ -55,6 +55,12 @@ main,
 footer {
 }
 
+main textarea {
+  width: 50%;
+  height: 5em;
+  vertical-align: text-top;
+}
+
 @keyframes arrow-animation {
   0% {
     background-position: 50% 50%;
@@ -91,6 +97,7 @@ footer {
   display: block;
 }
 
+main textarea,
 #controls input {
   background-color: #dddddd;
 }
