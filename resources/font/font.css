@@ -1,0 +1,16 @@
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: normal;
+	src:
+		local('Open Sans'),
+		local('OpenSans'),
+		/* from https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3fY6323mHUZFJMgTvxaG2iE.eot */
+		url('Open_Sans.eot?#iefix') format('embedded-opentype'),
+		/* from https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff */
+		url('Open_Sans.woff') format('woff'),
+		/* from https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2 */
+		url('Open_Sans.woff2') format('woff2'),
+		/* from https://fonts.gstatic.com/l/font?kit=cJZKeOuBrn4kERxqtaUH3Zbd9NUM7myrQQz30yPaGQ4&skey=62c1cbfccc78b4b2&v=v13#OpenSans */
+		url('Open_Sans.svg#OpenSans') format('svg'),
+}
