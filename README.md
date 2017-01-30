@@ -8,9 +8,12 @@
 
 
 
-## Screenshot
+## Screenshots
 
-<img src="https://joelpurra.com/projects/multi-video-frames/sample-olympic-games-summer-2012.jpg" alt="Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten"  title="Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten" />  
+[![Screenshot of multi-video-frames in action with sample videos](resources/screenshot/screenshot-2017-01-30T210148Z.png)](https://joelpurra.com/projects/multi-video-frames/?url=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F108679294&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2FXz1a5iTi3aU&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2F9bZkp7q19f0&url=https%3A%2F%2Fw.soundcloud.com%2Fplayer%2F%3Furl%3Dhttps%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F208395706%26visual%3Dtrue)  
+Screenshot of multi-video-frames in action with sample videos
+
+![Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten](resources/screenshot/sample-olympic-games-summer-2012.jpg)  
 Screenshot of multi-video-frames in action during the 2012 Summer Olympic Games, by Svarten.
 
 
