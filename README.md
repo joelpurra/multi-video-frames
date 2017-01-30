@@ -3,6 +3,7 @@
 *Play/view multiple video player streams in the same browser window by using iframes.*
 
 - [Project page and live version](https://joelpurra.com/projects/multi-video-frames/)
+- [Example loading four frames](https://joelpurra.com/projects/multi-video-frames/?url=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F108679294&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2FXz1a5iTi3aU&url=https%3A%2F%2Fwww.youtube.com%2Fembed%2F9bZkp7q19f0&url=https%3A%2F%2Fw.soundcloud.com%2Fplayer%2F%3Furl%3Dhttps%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F208395706%26visual%3Dtrue)
 - [Source code](https://github.com/joelpurra/multi-video-frames/)
 
 
