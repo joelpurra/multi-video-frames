@@ -141,4 +141,4 @@ open "http://localhost:1337"
 
 
 
-Copyright &copy; 2012, 2013, 2014, 2015, 2016, 2017, [Joel Purra](https://joelpurra.com/). All rights reserved. When using multi-video-frames, comply to at least one of the three available licenses: BSD, MIT, GPL. Please see the LICENSE files for details. [Your donations are appreciated!](https://joelpurra.com/donate/)
+[multi-video-frames](https://joelpurra.com/projects/multi-video-frames/) Copyright &copy; 2012, 2013, 2014, 2015, 2016, 2017, [Joel Purra](https://joelpurra.com/). All rights reserved. Released under the [GNU Affero General Public License 3.0 (AGPL-3.0)](https://en.wikipedia.org/wiki/Affero_General_Public_License). [Your donations are appreciated!](https://joelpurra.com/donate/)

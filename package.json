@@ -10,7 +10,7 @@
     "eslint": "eslint ./resources/javascript"
   },
   "author": "Joel Purra <code@joelpurra.com> (https://joelpurra.com/)",
-  "license": "BSD-2-Clause OR MIT OR GPL-3.0",
+  "license": "AGPL-3.0",
   "homepage": "https://joelpurra.com/projects/multi-video-frames/",
   "dependencies": {},
   "devDependencies": {
