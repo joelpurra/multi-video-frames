@@ -7,7 +7,9 @@
     "start": "st --no-cache",
     "test": "npm run --silent lint",
     "lint": "npm run --silent eslint --",
-    "eslint": "eslint ./resources/javascript"
+    "lint:fix": "npm run --silent eslint:fix --",
+    "eslint": "eslint ./resources/javascript",
+    "eslint:fix": "eslint --fix ./resources/javascript"
   },
   "author": "Joel Purra <code@joelpurra.com> (https://joelpurra.com/)",
   "license": "AGPL-3.0",
