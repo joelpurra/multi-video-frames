@@ -7,7 +7,7 @@
         },
     });
 
-    var sharingLinkBase = "https://joelpurra.com/projects/multi-video-frames/",
+    const sharingLinkBase = "https://joelpurra.com/projects/multi-video-frames/",
         $window = $(window),
         $controls = $("#controls"),
         $addUrl = $("#addUrl"),
@@ -18,7 +18,7 @@
 
     $(function() {
         function addUrlInput() {
-            var $urlInput = $("<input />", {
+            const $urlInput = $("<input />", {
                 "type": "url",
                 "placeholder": "https://... -- copy and paste URL here",
             })
@@ -33,9 +33,9 @@
         }
 
         function addVideoPanel($urlInput) {
-            var $videoPanel = $("<iframe />").addClass("videoPanel")
-            .data("$urlInput", $urlInput)
-            .appendTo($videos);
+            const $videoPanel = $("<iframe />").addClass("videoPanel")
+                .data("$urlInput", $urlInput)
+                .appendTo($videos);
 
             $urlInput.data("$videoPanel", $videoPanel).focus();
             setVideoSizes();
@@ -46,7 +46,7 @@
         }
 
         function updateVideoPanels() {
-            var $videoPanels = $videos.find(".videoPanel"),
+            const $videoPanels = $videos.find(".videoPanel"),
                 videoPanelCount = $videoPanels.length,
 
                 // TODO: make horizontal/vertical video panel count a setting.
@@ -72,12 +72,12 @@
         }
 
         function updateSharingLink() {
-            var sharingLinkParts = $controls
-                .find("input")
-                .map(function(index, input) { var $input = $(input); return $input.val(); })
-                .get()
-                .map(function(url) { return encodeURIComponent(url); })
-                .join("&url="),
+            const sharingLinkParts = $controls
+                    .find("input")
+                    .map(function(index, input) { const $input = $(input); return $input.val(); })
+                    .get()
+                    .map(function(url) { return encodeURIComponent(url); })
+                    .join("&url="),
                 sharingLink = sharingLinkBase + "?url=" + sharingLinkParts;
 
             $sharingLinkAnchor.attr("href", sharingLink);
@@ -91,13 +91,13 @@
         updateVideoPanels();
 
         $addUrl.click(function(evt) {
-            var $target = $(evt.target),
+            const $target = $(evt.target),
                 $urlInput = addUrlInput(),
                 $videoPanel = addVideoPanel($urlInput);
         });
 
         $window.on("change", function(evt) {
-            var $target = $(evt.target),
+            const $target = $(evt.target),
                 random = $target.data("random"),
                 url = $target.val(),
                 $videoPanel = $target.data("$videoPanel");
@@ -112,7 +112,7 @@
 
     (function() {
         function getValidOrNull(validValues, value) {
-            var filteredValidValue = validValues.filter(function(validValue) { return value === validValue; });
+            const filteredValidValue = validValues.filter(function(validValue) { return value === validValue; });
 
             if (filteredValidValue.length === 1) {
                 return value;
@@ -126,7 +126,7 @@
         }
 
         function isValidUrl(url) {
-            var isValid = typeof url === "string"
+            const isValid = typeof url === "string"
             && url.length > 0
             && (
                 // NOTE: not allowing http.
@@ -141,12 +141,12 @@
             ],
             locationSearch = document.location.search || "",
             querystring = locationSearch.substr(1).split("&")
-            .filter(function(part) { return part.length > 0; })
-            .map(function(part) { var parts = part.split("="); return { name: parts[0], value: parts.slice(1).join("=") }; })
-            .reduce(function(obj, part) { obj[part.name] = (obj[part.name] || []).concat(part.value); return obj; }, {}),
+                .filter(function(part) { return part.length > 0; })
+                .map(function(part) { const parts = part.split("="); return { name: parts[0], value: parts.slice(1).join("=") }; })
+                .reduce(function(obj, part) { obj[part.name] = (obj[part.name] || []).concat(part.value); return obj; }, {}),
             queryStringKeys = Object.keys(querystring),
             validQuerystring = queryStringKeys
-            .every(function(key) { return !!validQuerystringKeyOrNull(key); })
+                .every(function(key) { return !!validQuerystringKeyOrNull(key); })
             && queryStringKeys
                 .every(function(key) { return Array.isArray(querystring[key]); })
             && queryStringKeys
@@ -161,14 +161,14 @@
             Array.isArray(querystring.url) && querystring.url
                 .map(function(url) { return decodeURIComponent(url); })
                 .filter(function(url) { return isValidUrl(url); })
-            ) || [];
+        ) || [];
 
         urls.forEach(function(url, index) {
             setTimeout(function() {
                 $addUrl.click();
 
                 setTimeout(function() {
-                    var $inputs = $controls
+                    const $inputs = $controls
                             .find("input"),
                         $input = $inputs.last();
 
