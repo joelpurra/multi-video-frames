@@ -1,6 +1,7 @@
-(function(window, $) {
+((window, $) => {
     $.fn.extend({
         scrollToTop: function() {
+            // NOTE: cannot be an arrow function since the this context is dynamically bound.
             $("html, body").animate({
                 scrollTop: Math.max(0, $(this).offset().top + 1),
             });
@@ -16,87 +17,87 @@
         $sharingLinkAnchor = $("#sharing-link-anchor"),
         $sharingLinkTextbox = $("#sharing-link-textbox");
 
-    $(function() {
-        function addUrlInput() {
-            const $urlInput = $("<input />", {
-                "type": "url",
-                "placeholder": "https://... -- copy and paste URL here",
-            })
-                .data("random", getRandom())
-                .appendTo($controls);
+    $(() => {
+        const addUrlInput = () => {
+                const $urlInput = $("<input />", {
+                    "type": "url",
+                    "placeholder": "https://... -- copy and paste URL here",
+                })
+                    .data("random", getRandom())
+                    .appendTo($controls);
 
-            return $urlInput;
-        }
+                return $urlInput;
+            },
 
-        function getRandom() {
-            return Math.floor(Math.random() * 100000) + 100000;
-        }
+            getRandom = () => {
+                return Math.floor(Math.random() * 100000) + 100000;
+            },
 
-        function addVideoPanel($urlInput) {
-            const $videoPanel = $("<iframe />").addClass("videoPanel")
-                .data("$urlInput", $urlInput)
-                .appendTo($videos);
+            addVideoPanel = ($urlInput) => {
+                const $videoPanel = $("<iframe />").addClass("videoPanel")
+                    .data("$urlInput", $urlInput)
+                    .appendTo($videos);
 
-            $urlInput.data("$videoPanel", $videoPanel).focus();
-            setVideoSizes();
+                $urlInput.data("$videoPanel", $videoPanel).focus();
+                setVideoSizes();
 
-            $removeAllUrls.css("display", "inline-block");
+                $removeAllUrls.css("display", "inline-block");
 
-            return $videoPanel;
-        }
+                return $videoPanel;
+            },
 
-        function updateVideoPanels() {
-            const $videoPanels = $videos.find(".videoPanel"),
-                videoPanelCount = $videoPanels.length,
+            updateVideoPanels = () => {
+                const $videoPanels = $videos.find(".videoPanel"),
+                    videoPanelCount = $videoPanels.length,
 
-                // TODO: make horizontal/vertical video panel count a setting.
-                videoPanelsHorizontalMax = 3,
-                videoPanelsVerticalMax = 3,
-                videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
-                videoPanelsVertical = videoPanelsHorizontal === 0 ? 0 : Math.min(Math.ceil(videoPanelCount / videoPanelsHorizontal), videoPanelsVerticalMax);
+                    // TODO: make horizontal/vertical video panel count a setting.
+                    videoPanelsHorizontalMax = 3,
+                    videoPanelsVerticalMax = 3,
+                    videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
+                    videoPanelsVertical = videoPanelsHorizontal === 0 ? 0 : Math.min(Math.ceil(videoPanelCount / videoPanelsHorizontal), videoPanelsVerticalMax);
 
-            // Clear all classes.
-            $controls
-                .attr("class", "")
-                .addClass("urlInputs-" + videoPanelsHorizontal);
+                // Clear all classes.
+                $controls
+                    .attr("class", "")
+                    .addClass("urlInputs-" + videoPanelsHorizontal);
 
-            // Clear all classes.
-            $videos
-                .attr("class", "")
-                .addClass("videoPanelsHorizontal-" + videoPanelsHorizontal)
-                .addClass("videoPanelsVertical-" + videoPanelsVertical);
-        }
+                // Clear all classes.
+                $videos
+                    .attr("class", "")
+                    .addClass("videoPanelsHorizontal-" + videoPanelsHorizontal)
+                    .addClass("videoPanelsVertical-" + videoPanelsVertical);
+            },
 
-        function setVideoSizes() {
-            updateVideoPanels();
-        }
+            setVideoSizes = () => {
+                updateVideoPanels();
+            },
 
-        function updateSharingLink() {
-            const sharingLinkParts = $controls
-                    .find("input")
-                    .map(function(index, input) { const $input = $(input); return $input.val(); })
-                    .get()
-                    .map(function(url) { return encodeURIComponent(url); })
-                    .join("&url="),
-                sharingLink = sharingLinkBase + "?url=" + sharingLinkParts;
+            updateSharingLink = () => {
+                const sharingLinkParts = $controls
+                        .find("input")
+                        .map((index, input) => { const $input = $(input); return $input.val(); })
+                        .get()
+                        .map((url) => encodeURIComponent(url))
+                        .join("&url="),
+                    sharingLink = sharingLinkBase + "?url=" + sharingLinkParts;
 
-            $sharingLinkAnchor.attr("href", sharingLink);
-            $sharingLinkTextbox.val(sharingLink);
-        }
+                $sharingLinkAnchor.attr("href", sharingLink);
+                $sharingLinkTextbox.val(sharingLink);
+            };
 
-        $sharingLinkTextbox.on("focus", function(_event) { $sharingLinkTextbox.select(); });
+        $sharingLinkTextbox.on("focus", (_evt) => { $sharingLinkTextbox.select(); });
 
         $controls.scrollToTop();
 
         updateVideoPanels();
 
-        $addUrl.click(function(evt) {
+        $addUrl.click((evt) => {
             const _$target = $(evt.target),
                 $urlInput = addUrlInput(),
                 _$videoPanel = addVideoPanel($urlInput);
         });
 
-        $window.on("change", function(evt) {
+        $window.on("change", (evt) => {
             const $target = $(evt.target),
                 _random = $target.data("random"),
                 url = $target.val(),
@@ -110,47 +111,47 @@
         });
     });
 
-    (function() {
-        function getValidOrNull(validValues, value) {
-            const filteredValidValue = validValues.filter(function(validValue) { return value === validValue; });
+    (() => {
+        const getValidOrNull = (validValues, value) => {
+                const filteredValidValue = validValues.filter((validValue) => value === validValue);
 
-            if (filteredValidValue.length === 1) {
-                return value;
-            }
+                if (filteredValidValue.length === 1) {
+                    return value;
+                }
 
-            return null;
-        }
+                return null;
+            },
 
-        function validQuerystringKeyOrNull(key) {
-            return getValidOrNull(validQuerystringKeys, key);
-        }
+            validQuerystringKeyOrNull = (key) => {
+                return getValidOrNull(validQuerystringKeys, key);
+            },
 
-        function isValidUrl(url) {
-            const isValid = typeof url === "string"
-            && url.length > 0
-            && (
-                // NOTE: not allowing http.
-                url.startsWith("https://")
-            );
+            isValidUrl = (url) => {
+                const isValid = typeof url === "string"
+                && url.length > 0
+                && (
+                    // NOTE: not allowing http.
+                    url.startsWith("https://")
+                );
 
-            return isValid;
-        }
+                return isValid;
+            },
 
-        const validQuerystringKeys = [
+            validQuerystringKeys = [
                 "url",
             ],
             locationSearch = document.location.search || "",
             querystring = locationSearch.substr(1).split("&")
-                .filter(function(part) { return part.length > 0; })
-                .map(function(part) { const parts = part.split("="); return { name: parts[0], value: parts.slice(1).join("=") }; })
-                .reduce(function(obj, part) { obj[part.name] = (obj[part.name] || []).concat(part.value); return obj; }, {}),
+                .filter((part) => part.length > 0)
+                .map((part) => { const parts = part.split("="); return { name: parts[0], value: parts.slice(1).join("=") }; })
+                .reduce((obj, part) => { obj[part.name] = (obj[part.name] || []).concat(part.value); return obj; }, {}),
             queryStringKeys = Object.keys(querystring),
             validQuerystring = queryStringKeys
-                .every(function(key) { return !!validQuerystringKeyOrNull(key); })
-            && queryStringKeys
-                .every(function(key) { return Array.isArray(querystring[key]); })
-            && queryStringKeys
-                .every(function(key) { return querystring[key].length > 0; });
+                .every((key) => !!validQuerystringKeyOrNull(key))
+                && queryStringKeys
+                    .every((key) => Array.isArray(querystring[key]))
+                && queryStringKeys
+                    .every((key) => querystring[key].length > 0);
 
         let urls;
 
@@ -161,15 +162,15 @@
         // eslint-disable-next-line prefer-const
         urls = (
             Array.isArray(querystring.url) && querystring.url
-                .map(function(url) { return decodeURIComponent(url); })
-                .filter(function(url) { return isValidUrl(url); })
+                .map((url) => decodeURIComponent(url))
+                .filter((url) => isValidUrl(url))
         ) || [];
 
-        urls.forEach(function(url, index) {
-            setTimeout(function() {
+        urls.forEach((url, index) => {
+            setTimeout(() => {
                 $addUrl.click();
 
-                setTimeout(function() {
+                setTimeout(() => {
                     const $inputs = $controls
                             .find("input"),
                         $input = $inputs.last();
@@ -182,5 +183,5 @@
             },
             1000 * (index + 1));
         });
-    }());
-}(window, window.jQuery));
+    })();
+})(window, window.jQuery);
