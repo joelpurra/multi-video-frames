@@ -17,6 +17,103 @@
             console.log("multi-video-frames", ...args);
         },
 
+        updateSharingLink = () => {
+            const sharingLinkParts = $controls
+                    .find("input")
+                    .map((index, input) => {
+                        const $input = $(input);
+
+                        return $input.val();
+                    })
+                    .get()
+                    .map((url) => encodeURIComponent(url))
+                    .join("&url="),
+                sharingLink = sharingLinkBase + "?url=" + sharingLinkParts;
+
+            $sharingLinkAnchor.attr("href", sharingLink);
+            $sharingLinkTextbox.val(sharingLink);
+        },
+
+        getVideoPanels = () => $videos.find(".videoPanel"),
+
+        updateVideoPanels = () => {
+            const $videoPanels = getVideoPanels(),
+                videoPanelCount = $videoPanels.length,
+
+                // TODO: make horizontal/vertical video panel count a setting.
+                videoPanelsHorizontalMax = 3,
+                videoPanelsVerticalMax = 3,
+                videoPanelsHorizontal = Math.min(
+                    Math.ceil(Math.sqrt(videoPanelCount)),
+                    videoPanelsHorizontalMax,
+                ),
+                videoPanelsVertical = videoPanelsHorizontal === 0
+                    ? 0
+                    : Math.min(
+                        Math.ceil(videoPanelCount / videoPanelsHorizontal),
+                        videoPanelsVerticalMax,
+                    );
+
+            // Clear all classes.
+            $controls
+                .attr("class", "")
+                .addClass("urlInputs-" + videoPanelsHorizontal);
+
+            // Clear all classes.
+            $videos
+                .attr("class", "")
+                .addClass("videoPanelsHorizontal-" + videoPanelsHorizontal)
+                .addClass("videoPanelsVertical-" + videoPanelsVertical);
+        },
+
+        setVideoSizes = () => {
+            updateVideoPanels();
+        },
+
+        addUrlInput = (url) => {
+            const $urlInput = $("<input />", {
+                "type": "url",
+                "placeholder": "https://... -- copy and paste URL here",
+                "value": url,
+            })
+                .appendTo($controls);
+
+            return $urlInput;
+        },
+
+        addVideoPanel = ($urlInput) => {
+            const $videoPanel = $("<iframe />")
+                .addClass("videoPanel")
+                .data("$urlInput", $urlInput)
+                .appendTo($videos);
+
+            $urlInput
+                .data("$videoPanel", $videoPanel)
+                .focus();
+
+            setVideoSizes();
+
+            $removeAllUrls.css("display", "inline-block");
+
+            return $videoPanel;
+        },
+
+        updateVideoUrl = ($urlInput) => {
+            const url = $urlInput.val(),
+                $videoPanel = $urlInput.data("$videoPanel");
+
+            $videoPanel.attr("src", url);
+
+            updateSharingLink();
+        },
+
+        addUrlElementSet = (url) => {
+            const $urlInput = addUrlInput(url),
+                _$videoPanel = addVideoPanel($urlInput);
+
+            updateVideoUrl($urlInput);
+        },
+
         sharingLinkBase = "https://joelpurra.com/projects/multi-video-frames/",
         $window = $(window),
         $controls = $("#controls"),
@@ -27,116 +124,31 @@
         $sharingLinkTextbox = $("#sharing-link-textbox");
 
     $(() => {
-        const addUrlInput = () => {
-                const $urlInput = $("<input />", {
-                    "type": "url",
-                    "placeholder": "https://... -- copy and paste URL here",
-                })
-                    .data("random", getRandom())
-                    .appendTo($controls);
-
-                return $urlInput;
-            },
-
-            getRandom = () => {
-                return Math.floor(Math.random() * 100000) + 100000;
-            },
-
-            addVideoPanel = ($urlInput) => {
-                const $videoPanel = $("<iframe />")
-                    .addClass("videoPanel")
-                    .data("$urlInput", $urlInput)
-                    .appendTo($videos);
-
-                $urlInput
-                    .data("$videoPanel", $videoPanel)
-                    .focus();
-
-                setVideoSizes();
-
-                $removeAllUrls.css("display", "inline-block");
-
-                return $videoPanel;
-            },
-
-            updateVideoPanels = () => {
-                const $videoPanels = $videos.find(".videoPanel"),
-                    videoPanelCount = $videoPanels.length,
-
-                    // TODO: make horizontal/vertical video panel count a setting.
-                    videoPanelsHorizontalMax = 3,
-                    videoPanelsVerticalMax = 3,
-                    videoPanelsHorizontal = Math.min(
-                        Math.ceil(Math.sqrt(videoPanelCount)),
-                        videoPanelsHorizontalMax,
-                    ),
-                    videoPanelsVertical = videoPanelsHorizontal === 0
-                        ? 0
-                        : Math.min(
-                            Math.ceil(videoPanelCount / videoPanelsHorizontal),
-                            videoPanelsVerticalMax,
-                        );
-
-                // Clear all classes.
-                $controls
-                    .attr("class", "")
-                    .addClass("urlInputs-" + videoPanelsHorizontal);
-
-                // Clear all classes.
-                $videos
-                    .attr("class", "")
-                    .addClass("videoPanelsHorizontal-" + videoPanelsHorizontal)
-                    .addClass("videoPanelsVertical-" + videoPanelsVertical);
-            },
-
-            setVideoSizes = () => {
-                updateVideoPanels();
-            },
-
-            updateSharingLink = () => {
-                const sharingLinkParts = $controls
-                        .find("input")
-                        .map((index, input) => {
-                            const $input = $(input);
-
-                            return $input.val();
-                        })
-                        .get()
-                        .map((url) => encodeURIComponent(url))
-                        .join("&url="),
-                    sharingLink = sharingLinkBase + "?url=" + sharingLinkParts;
-
-                $sharingLinkAnchor.attr("href", sharingLink);
-                $sharingLinkTextbox.val(sharingLink);
-            };
-
         $sharingLinkTextbox.on("focus", (_evt) => { $sharingLinkTextbox.select(); });
 
-        $controls.scrollToTop();
+        $controls
+            .delay(10)
+            .scrollToTop();
 
         updateVideoPanels();
 
         $addUrl.click((evt) => {
             const _$target = $(evt.target),
-                $urlInput = addUrlInput(),
-                _$videoPanel = addVideoPanel($urlInput);
+                _$urlSet = addUrlElementSet();
         });
 
         $window.on("change", (evt) => {
-            const $target = $(evt.target),
-                _random = $target.data("random"),
-                url = $target.val(),
-                $videoPanel = $target.data("$videoPanel");
+            const $target = $(evt.target);
 
-            $videos.scrollToTop();
+            updateVideoUrl($target);
 
-            $videoPanel.attr("src", url);
-
-            updateSharingLink();
+            $videos
+                .delay(10)
+                .scrollToTop();
         });
     });
 
-    (() => {
+    $(() => {
         const getValidOrNull = (validValues, value) => {
                 const filteredValidValue = validValues.filter((validValue) => value === validValue);
 
@@ -160,6 +172,23 @@
                 );
 
                 return isValid;
+            },
+
+            addUrls = (remainingUrls) => {
+                const url = remainingUrls[0];
+
+                if (!url) {
+                    return;
+                }
+
+                log("loading", getVideoPanels().length, url);
+
+                addUrlElementSet(url);
+
+                setTimeout(
+                    () => addUrls(remainingUrls.slice(1)),
+                    250,
+                );
             },
 
             validQuerystringKeys = [
@@ -211,28 +240,6 @@
 
         log("urls found in querystring", urls);
 
-        urls.forEach((url, index) => {
-            setTimeout(
-                () => {
-                    log("loading", index, url);
-
-                    $addUrl.click();
-
-                    setTimeout(
-                        () => {
-                            const $inputs = $controls
-                                    .find("input"),
-                                $input = $inputs.last();
-
-                            $input
-                                .val(url)
-                                .change();
-                        },
-                        250 * (index + 1),
-                    );
-                },
-                1000 * (index + 1),
-            );
-        });
-    })();
+        addUrls(urls);
+    });
 })(window, window.jQuery);
