@@ -19,7 +19,7 @@
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-promise": "^4.3.1",
     "pre-commit": "^1.2.2",
-    "st": "^1.2.2"
+    "st": "^2.0.0"
   },
   "repository": {
     "type": "git",
