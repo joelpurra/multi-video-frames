@@ -12,14 +12,13 @@
   "author": "Joel Purra <code@joelpurra.com> (https://joelpurra.com/)",
   "license": "AGPL-3.0",
   "homepage": "https://joelpurra.com/projects/multi-video-frames/",
-  "dependencies": {},
   "devDependencies": {
-    "eslint": "^3.14.1",
+    "eslint": "^3.19.0",
     "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^2.3.1",
     "pre-commit": "^1.2.2",
-    "st": "^1.2.0"
+    "st": "^1.2.2"
   },
   "repository": {
     "type": "git",
