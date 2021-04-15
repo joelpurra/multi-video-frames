@@ -118,8 +118,9 @@
             "warn",
             {
                 "vars": "all",
-                "args": "all",
-                "argsIgnorePattern": "req|res|next"
+                "args": "after-used",
+                "argsIgnorePattern": "^_|req|res|next",
+                "varsIgnorePattern": "^_"
             }
         ],
         "no-use-before-define": "off",

@@ -84,21 +84,21 @@
             $sharingLinkTextbox.val(sharingLink);
         }
 
-        $sharingLinkTextbox.on("focus", function(event) { $sharingLinkTextbox.select(); });
+        $sharingLinkTextbox.on("focus", function(_event) { $sharingLinkTextbox.select(); });
 
         $controls.scrollToTop();
 
         updateVideoPanels();
 
         $addUrl.click(function(evt) {
-            const $target = $(evt.target),
+            const _$target = $(evt.target),
                 $urlInput = addUrlInput(),
-                $videoPanel = addVideoPanel($urlInput);
+                _$videoPanel = addVideoPanel($urlInput);
         });
 
         $window.on("change", function(evt) {
             const $target = $(evt.target),
-                random = $target.data("random"),
+                _random = $target.data("random"),
                 url = $target.val(),
                 $videoPanel = $target.data("$videoPanel");
 
@@ -136,7 +136,7 @@
             return isValid;
         }
 
-        var validQuerystringKeys = [
+        const validQuerystringKeys = [
                 "url",
             ],
             locationSearch = document.location.search || "",
@@ -150,13 +150,15 @@
             && queryStringKeys
                 .every(function(key) { return Array.isArray(querystring[key]); })
             && queryStringKeys
-                .every(function(key) { return querystring[key].length > 0; }),
-            urls;
+                .every(function(key) { return querystring[key].length > 0; });
+
+        let urls;
 
         if (!validQuerystring) {
             throw new Error("The querystring was not valid.");
         }
 
+        // eslint-disable-next-line prefer-const
         urls = (
             Array.isArray(querystring.url) && querystring.url
                 .map(function(url) { return decodeURIComponent(url); })
