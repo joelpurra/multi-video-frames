@@ -3,12 +3,21 @@
         scrollToTop: function() {
             // NOTE: cannot be an arrow function since the this context is dynamically bound.
             $("html, body").animate({
-                scrollTop: Math.max(0, $(this).offset().top + 1),
+                scrollTop: Math.max(
+                    0,
+                    $(this).offset().top + 1,
+                ),
             });
         },
     });
 
-    const sharingLinkBase = "https://joelpurra.com/projects/multi-video-frames/",
+    const
+        log = (...args) => {
+            // eslint-disable-next-line no-console
+            console.log("multi-video-frames", ...args);
+        },
+
+        sharingLinkBase = "https://joelpurra.com/projects/multi-video-frames/",
         $window = $(window),
         $controls = $("#controls"),
         $addUrl = $("#addUrl"),
@@ -34,11 +43,15 @@
             },
 
             addVideoPanel = ($urlInput) => {
-                const $videoPanel = $("<iframe />").addClass("videoPanel")
+                const $videoPanel = $("<iframe />")
+                    .addClass("videoPanel")
                     .data("$urlInput", $urlInput)
                     .appendTo($videos);
 
-                $urlInput.data("$videoPanel", $videoPanel).focus();
+                $urlInput
+                    .data("$videoPanel", $videoPanel)
+                    .focus();
+
                 setVideoSizes();
 
                 $removeAllUrls.css("display", "inline-block");
@@ -53,8 +66,16 @@
                     // TODO: make horizontal/vertical video panel count a setting.
                     videoPanelsHorizontalMax = 3,
                     videoPanelsVerticalMax = 3,
-                    videoPanelsHorizontal = Math.min(Math.ceil(Math.sqrt(videoPanelCount)), videoPanelsHorizontalMax),
-                    videoPanelsVertical = videoPanelsHorizontal === 0 ? 0 : Math.min(Math.ceil(videoPanelCount / videoPanelsHorizontal), videoPanelsVerticalMax);
+                    videoPanelsHorizontal = Math.min(
+                        Math.ceil(Math.sqrt(videoPanelCount)),
+                        videoPanelsHorizontalMax,
+                    ),
+                    videoPanelsVertical = videoPanelsHorizontal === 0
+                        ? 0
+                        : Math.min(
+                            Math.ceil(videoPanelCount / videoPanelsHorizontal),
+                            videoPanelsVerticalMax,
+                        );
 
                 // Clear all classes.
                 $controls
@@ -75,7 +96,11 @@
             updateSharingLink = () => {
                 const sharingLinkParts = $controls
                         .find("input")
-                        .map((index, input) => { const $input = $(input); return $input.val(); })
+                        .map((index, input) => {
+                            const $input = $(input);
+
+                            return $input.val();
+                        })
                         .get()
                         .map((url) => encodeURIComponent(url))
                         .join("&url="),
@@ -141,10 +166,28 @@
                 "url",
             ],
             locationSearch = document.location.search || "",
-            querystring = locationSearch.substr(1).split("&")
+            querystring = locationSearch
+                .substr(1)
+                .split("&")
                 .filter((part) => part.length > 0)
-                .map((part) => { const parts = part.split("="); return { name: parts[0], value: parts.slice(1).join("=") }; })
-                .reduce((obj, part) => { obj[part.name] = (obj[part.name] || []).concat(part.value); return obj; }, {}),
+                .map((part) => {
+                    const parts = part
+                        .split("=");
+                    return {
+                        name: parts[0],
+                        value: parts
+                            .slice(1)
+                            .join("="),
+                    };
+                })
+                .reduce(
+                    (obj, part) => {
+                        obj[part.name] = (obj[part.name] || []).concat(part.value);
+
+                        return obj;
+                    },
+                    {},
+                ),
             queryStringKeys = Object.keys(querystring),
             validQuerystring = queryStringKeys
                 .every((key) => !!validQuerystringKeyOrNull(key))
@@ -166,22 +209,30 @@
                 .filter((url) => isValidUrl(url))
         ) || [];
 
+        log("urls found in querystring", urls);
+
         urls.forEach((url, index) => {
-            setTimeout(() => {
-                $addUrl.click();
+            setTimeout(
+                () => {
+                    log("loading", index, url);
 
-                setTimeout(() => {
-                    const $inputs = $controls
-                            .find("input"),
-                        $input = $inputs.last();
+                    $addUrl.click();
 
-                    $input
-                        .val(url)
-                        .change();
+                    setTimeout(
+                        () => {
+                            const $inputs = $controls
+                                    .find("input"),
+                                $input = $inputs.last();
+
+                            $input
+                                .val(url)
+                                .change();
+                        },
+                        250 * (index + 1),
+                    );
                 },
-                250 * (index + 1));
-            },
-            1000 * (index + 1));
+                1000 * (index + 1),
+            );
         });
     })();
 })(window, window.jQuery);
